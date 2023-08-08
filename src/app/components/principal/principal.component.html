@@ -1,0 +1,123 @@
+<div class="formulario">
+    <form class="w-1/4 mx-auto my-10 px-14 py-12 bg-gray-100 border border-gray-200 rounded-md shadow-md">
+
+        <h2 class="pb-2 text" *ngIf="selecionar">
+            Faça sua Reserva:
+        </h2>
+        <h2 class="pb-2 text" *ngIf="!selecionar">
+            Edite a Reserva:
+        </h2>
+
+        <div class="mb-6">
+            <label for="nomeHospede" class="block mb-2 text-sm font-medium text-gray-900">Nome do Hospede</label>
+            <input type="email" id="nomeHospede" name="nomeHospede" [(ngModel)]="reserva.nomeHospede"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Maria Silva" required>
+        </div>
+
+        <div class="mb-6">
+            <label for="dataInicio" class="block mb-2 text-sm font-medium text-gray-900">Data inicial</label>
+            <input type="date" id="dataInicio" name="dataInicio" [(ngModel)]="reserva.dataInicio"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                required>
+        </div>
+
+        <div class="mb-6">
+            <label for="dataFim" class="block mb-2 text-sm font-medium text-gray-900">Data Final</label>
+            <input type="date" id="dataFim" name="dataFim" [(ngModel)]="reserva.dataFim"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                required>
+        </div>
+
+        <div class="mb-6">
+            <label for="quantidadePessoas" class="block mb-2 text-sm font-medium text-gray-900">Quantidade de
+                Pessoas</label>
+            <input type="number" id="qtPessoas" name="quantidadePessoas" [(ngModel)]="reserva.quantidadePessoas"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                required placeholder="2">
+        </div>
+
+        <div class="mb-6" *ngIf="!selecionar">
+            <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+            <select id="status" name="status" [(ngModel)]="reserva.status"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                <option [value]="'CONFIRMADA'" [selected]="reserva.status === 'CONFIRMADA'">Confirmado</option>
+                <option [value]="'PENDENTE'" [selected]="reserva.status === 'PENDENTE'">Pendente</option>
+            </select>
+        </div>
+
+        <div class="flex justify-evenly">
+            <button type="submit" *ngIf="btns"
+                class="cursor-pointer text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                (click)="cadastrar()"> Cadastrar </button>
+
+            <button type="submit" *ngIf="!btns" (click)="editar()"
+                class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+                Alterar </button>
+
+            <button type="" *ngIf="!btns" (click)="cancelarReserva(reserva)"
+                class="cursor-pointer text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Cancelar
+                Reserva</button>
+
+            <button type="" *ngIf="!btns" (click)="btnCancelar()"
+                class="cursor-pointer text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+                Cancelar </button>
+        </div>
+    </form>
+</div>
+
+<div class="w-4/6 mx-auto py-10 overflow-x-auto" *ngIf="tabela">
+    <table class="w-full text-left text-gray-500 border rounded-md shadow-md">
+        <thead class="text-gray-800 uppercase bg-gray-200">
+            <tr>
+                <th scope="col" class="px-6 py-4">
+                    Nome do Hospede
+                </th>
+                <th scope="col" class="px-6 py-4">
+                    Data inicial
+                </th>
+                <th scope="col" class="px-6 py-4">
+                    Data Final
+                </th>
+                <th scope="col" class="px-6 py-4">
+                    N° de Pessoas
+                </th>
+                <th scope="col" class="px-6 py-4">
+                    Status
+                </th>
+                <th scope="col" class="px-6 py-4">
+                    Editar
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" *ngFor="let r of list; index as i">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{ r.nomeHospede }}
+                </th>
+                <td class="px-6 py-4">
+                    {{ r.dataInicio | date: 'dd/MM/yyyy'}}
+                </td>
+                <td class="px-6 py-4">
+                    {{ r.dataFim | date: 'dd/MM/yyyy'}}
+                </td>
+                <td class="px-6 py-4">
+                    {{ r.quantidadePessoas }}
+                </td>
+                <td class="px-6 py-4 font-semibold status-{{r.status}}">
+                    {{ r.status }}
+                </td>
+                <td class="px-6 py-4">
+                    <button type="button" value="Editar" (click)="selecionarReserva(i)"
+                        [disabled]="r.status == 'CANCELADO'"
+                        class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs w-full sm:w-auto px-2.5 py-1.5 text-center">
+                        <span class="material-symbols-outlined">
+                            edit_square
+                        </span>
+                    </button>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
