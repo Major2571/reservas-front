@@ -1,30 +1,43 @@
-# ReservasFront
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.6.
+# Projeto Angular - Consumo da API REST de Reservas
 
-## Development server
+Este projeto é uma aplicação Angular que consome a API REST de Reservas para gerenciar e exibir informações sobre reservas de hospedagem.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Tecnologias Utilizadas
 
-## Code scaffolding
+-   Angular
+-   TypeScript
+-   HTML
+-   CSS
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Instalação e Execução
 
-## Build
+1.  Clone o repositório para o seu ambiente local.
+```bash
+	https://github.com/Major2571/reservas-front/
+```
+2.  Certifique-se de que você tenha o Node.js e o Angular CLI instalados em sua máquina.
+3.  No terminal, navegue até a pasta do projeto e execute o comando `npm install` para instalar as dependências.
+4.  Execute o projeto usando o comando `ng serve` e acesse a aplicação no navegador em `http://localhost:4200`.
+5. Obs: o servidor da API também deve estar em execução ( você pode encontrar o Backend do projeto [aqui](https://github.com/Major2571/reservas.git))
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Funcionalidades
 
-## Running unit tests
+A aplicação oferece as seguintes funcionalidades:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+-   Listagem de todas as reservas cadastradas
+-   Exibição de detalhes de uma reserva específica
+-   Criação de novas reservas
+-   Edição de informações de uma reserva
+-   Cancelamento de reservas (atualização do status para "CANCELADO")
 
-## Running end-to-end tests
+## Capturas de tela
+### Página Inicial: 
+Onde podemos fazer uma nova reserva, visualizar, ou, editar. Note que, Reservas canceladas não podem ser alteradas.
+![image](https://github.com/Major2571/reservas-front/assets/99849455/70dcca4e-0bb5-4bf3-a322-5b7f857dfbcf)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+### Formulário de edição:
+Ao clicar em editar, o formulário de edição estará disponível para você realizar a alteração, ou, cancelar a reserva.
+![image](https://github.com/Major2571/reservas-front/assets/99849455/c22a65ed-9340-4e0f-9d34-8525f8fc6cc3)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-# reservas-front
-Front End do desafio IBM
